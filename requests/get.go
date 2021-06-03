@@ -4,11 +4,13 @@ import (
   "io/ioutil"
   "log"
   "net/http"
+  "fmt"
 )
 
-func Get(url string) {
-  example := "http://game-a1.granbluefantasy.jp/assets_en/img_mid/sp/assets/npc/gacha/3030310000_01.png"
-  resp, err := http.Get(example)
+func Get(url string) []byte {
+  url = fmt.Sprintf("http://%s", url)
+
+  resp, err := http.Get(url)
   if err != nil {
     log.Fatalln(err)
   }
@@ -19,7 +21,6 @@ func Get(url string) {
     log.Fatalln(err)
   }
 
-  sb := string(body)
-  log.Printf(sb)
+  return body
 }
 

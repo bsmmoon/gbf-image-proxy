@@ -1,16 +1,21 @@
 package main
 
 import (
-  "fmt"
+  "net/http"
+  "log"
 
-  "github.com/google/go-cmp/cmp"
-
-  "test.com/go-project/morestrings"
   "test.com/go-project/requests"
 )
 
 func main() {
-  fmt.Println(morestrings.ReverseRunes("Hello World!"))
-  fmt.Println(cmp.Diff("Hello World", "Hello Go"))
-  requests.Get("")
+  log.SetFlags(log.LstdFlags | log.Lshortfile)
+
+  http.HandleFunc("/get/", handler)
+  log.Fatal(http.ListenAndServe(":3000", nil))
 }
+
+func handler(w http.ResponseWriter, r *http.Request) {
+  url := r.URL.Path[len("/get/"):]
+  w.Write(requests.Get(url))
+}
+
