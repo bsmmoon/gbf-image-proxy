@@ -21,6 +21,9 @@ func Get(url string) []byte {
     log.Fatalln(err)
   }
 
+  log.Printf(url)
+  log.Printf("Size: %v", len(body))
+
   return body
 }
 

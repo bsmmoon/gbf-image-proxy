@@ -2,20 +2,16 @@
 
 install:
 	go mod tidy
-	GOBIN=${GOBIN} go install test.com/go-project
-
-run:
-	${GOBIN}/go-project
 
 clean:
 	go clean -modcache
 
 build:
-	go build
+	go build -o bin/
 
 server:
 	make build
-	./go-project
+	./bin/go-project
 
 kill:
 	kill -9 ${shell lsof -ti :$(PORT)}
