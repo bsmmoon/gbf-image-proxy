@@ -1,10 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"log"
 	"net/http"
-
-	"gbf-image-proxy/requests"
 )
 
 func main() {
@@ -16,5 +16,12 @@ func main() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.Path[len("/get/"):]
-	w.Write(requests.Get(url))
+	url = fmt.Sprintf("http://%s", url)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	io.Copy(w, resp.Body)
 }
