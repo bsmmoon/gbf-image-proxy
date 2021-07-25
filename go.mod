@@ -1,3 +1,3 @@
-module test.com/go-project
+module gbf-image-proxy
 
 go 1.16
