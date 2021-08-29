@@ -9,7 +9,7 @@ clean:
 build:
 	go build -o bin/
 
-server:
+start:
 	make build
 	PORT=${PORT} ./bin/gbf-image-proxy
 
@@ -22,3 +22,6 @@ test:
 deploy:
 	make build
 	gcloud app deploy
+
+then:
+	echo ""
