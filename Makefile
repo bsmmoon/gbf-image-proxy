@@ -11,11 +11,10 @@ build:
 
 server:
 	make build
-	./bin/go-project
+	PORT=${PORT} ./bin/gbf-image-proxy
 
 kill:
 	kill -9 ${shell lsof -ti :$(PORT)}
 
 test:
 	go test ./...
-

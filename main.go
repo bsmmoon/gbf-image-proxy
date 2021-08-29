@@ -5,13 +5,17 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	http.HandleFunc("/get/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Print(fmt.Sprintf("Listening to %s", port))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
