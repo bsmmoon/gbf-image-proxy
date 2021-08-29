@@ -18,3 +18,7 @@ kill:
 
 test:
 	go test ./...
+
+deploy:
+	make build
+	gcloud app deploy
