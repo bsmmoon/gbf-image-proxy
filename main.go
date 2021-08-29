@@ -43,5 +43,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func checkSafety(url string) bool {
 	flag := true
 	flag = flag && strings.HasPrefix(url, "http://game-a.granbluefantasy.jp")
+	flag = flag && (strings.HasSuffix(url, ".png") || strings.HasSuffix(url, ".jpg"))
 	return flag
 }
